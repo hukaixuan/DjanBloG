@@ -82,12 +82,14 @@ AUTH_USER_MODEL = 'blog_app.user'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django_blog_db',
-        'USER': 'root',
-        'PASSWORD': '12345678',
-        'HOST': '',
-        'PORT': '',
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'NAME': 'django_blog_db',
+        # 'USER': 'root',
+        # 'PASSWORD': '12345678',
+        # 'HOST': '',
+        # 'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
