@@ -1,0 +1,1 @@
+2017-07-06 18:02:27,950 [Thread-2:123145434259456] [blog_app.views:12] [views:index] [ERROR]- [Errno 2] No such file or directory: 'fake.txt'

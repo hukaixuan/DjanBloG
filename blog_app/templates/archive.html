@@ -1,0 +1,81 @@
+{% extends 'base.html' %} 
+{% load staticfiles %}
+
+
+{% block content %}
+<div id="article-banner">
+    <h2>Archives</h2>
+    <p class="post-date">文章归档</p>
+</div>
+<main class="app-body" id="archives">
+    <section class="time-section">
+        <h1 class="section-year">
+            2017
+  </h1>
+        <div class="section-list">
+            {% for article in article_list %}
+                <div class="section-list-item">
+                    <a href="/2017/06/30/项目演示--基于地理位置的社交系统/" class="archive-title">{{ article.title }}</a>
+                    <p class="archive-date">{{ article.date_publish }}</p>
+                </div>
+            {% endfor %}
+
+        </div>
+    </section>
+</main>
+
+{% endblock %}
+
+{% block script %}
+<script>
+(function() {
+    var url = {% url 'article' %}+'?id={{ article.id }}';
+    $('#article-banner').geopattern(url);
+    $('.header').removeClass('fixed-header');
+})();
+</script>
+<div class="scroll-top">
+    <span class="arrow-icon"></span>
+</div>
+<script>
+function async(u, c) {
+    var d = document,
+        t = 'script',
+        o = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+        o.addEventListener('load', function(e) {
+            c(null, e);
+        }, false);
+    }
+    s.parentNode.insertBefore(o, s);
+}
+</script>
+<script>
+async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function() {
+    FastClick.attach(document.body);
+})
+</script>
+<script>
+var hasLine = 'true';
+async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function() {
+    $('figure pre').each(function(i, block) {
+        var figure = $(this).parents('figure');
+        if (hasLine == 'false') {
+            figure.find('.gutter').hide();
+        }
+        var lang = figure.attr('class').split(' ')[1] || 'code';
+        var codeHtml = $(this).html();
+        var codeTag = document.createElement('code');
+        codeTag.className = lang;
+        codeTag.innerHTML = codeHtml;
+        $(this).attr('class', '').empty().html(codeTag);
+        figure.attr('data-lang', lang.toUpperCase());
+        hljs.highlightBlock(block);
+    });
+})
+</script>
+<!-- Baidu Tongji -->
+<script src="{% static '/js/script.js' %}"></script>
+{% endblock %}

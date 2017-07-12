@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div id="about-banner" style="background-image: url({% static '/css/images/about.jpg' %})"></div>
+    <div class="author">
+        <div class="head">
+            <img src="{% static '/css/images/logo.png' %}" />
+        </div>
+        <h3>hukx.michael</h3>
+        <p class="discription">Life is so beautiful</p>
+        <section class="share-icons">
+            <a class="icon-twitter" href="https://twitter.com/hukx_michael" target="_blank">
+                <span class="fa-stack fa-lg">
+          <i class="fa fa-circle fa-stack-2x"></i>
+          <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+            </a>
+            <a class="icon-github" href="https://github.com/hukaixuan" target="_blank">
+                <span class="fa-stack fa-lg">
+          <i class="fa fa-circle fa-stack-2x"></i>
+          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+        </span>
+            </a>
+            <a class="icon-zhihu" href="https://www.zhihu.com/people/hukx.michael" target="_blank">
+                <span class="fa-stack fa-lg">
+          <i class="fa fa-circle fa-stack-2x"></i>
+          <i class="fa fa-stack-1x fa-inverse">知</i>
+        </span>
+            </a>
+        </section>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+    (function() {
+        $('.header').removeClass('fixed-header')
+        var windowH = $(window).height();
+        var author = $('.author')
+        var bodyH = author.offset().top + author[0].offsetHeight + 71;
+        if (bodyH < windowH) {
+            author.css({
+                'margin-bottom': windowH - bodyH
+            })
+        }
+    })();
+    </script>
+    <div class="scroll-top">
+        <span class="arrow-icon"></span>
+    </div>
+    <script>
+    function async(u, c) {
+        var d = document,
+            t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function(e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
+    </script>
+    <script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function() {
+        FastClick.attach(document.body);
+    })
+    </script>
+    <script>
+    var hasLine = 'true';
+    async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function() {
+        $('figure pre').each(function(i, block) {
+            var figure = $(this).parents('figure');
+            if (hasLine == 'false') {
+                figure.find('.gutter').hide();
+            }
+            var lang = figure.attr('class').split(' ')[1] || 'code';
+            var codeHtml = $(this).html();
+            var codeTag = document.createElement('code');
+            codeTag.className = lang;
+            codeTag.innerHTML = codeHtml;
+            $(this).attr('class', '').empty().html(codeTag);
+            figure.attr('data-lang', lang.toUpperCase());
+            hljs.highlightBlock(block);
+        });
+    })
+    </script>
+    <!-- Baidu Tongji -->
+    <script src="{% static '/js/script.js' %}"></script>
+{% endblock %}

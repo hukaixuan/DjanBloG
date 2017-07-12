@@ -1,0 +1,96 @@
+2017-07-06 21:25:13,837 [Thread-3:123145557987328] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /admin/blog_app/category/
+Traceback (most recent call last):
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/db/backends/utils.py", line 65, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/db/backends/mysql/base.py", line 101, in execute
+    return self.cursor.execute(query, args)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/pymysql/cursors.py", line 166, in execute
+    result = self._query(query)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/pymysql/connections.py", line 856, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/pymysql/connections.py", line 1057, in _read_query_result
+    result.read()
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/pymysql/connections.py", line 1340, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/pymysql/connections.py", line 1014, in _read_packet
+    packet.check_error()
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/pymysql/connections.py", line 393, in check_error
+    err.raise_mysql_exception(self._data)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/pymysql/err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1146, "Table 'django_blog_db.blog_app_category' doesn't exist")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/contrib/admin/options.py", line 551, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/utils/decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/views/decorators/cache.py", line 57, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/contrib/admin/sites.py", line 224, in inner
+    return view(request, *args, **kwargs)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/utils/decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/utils/decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/utils/decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/contrib/admin/options.py", line 1542, in changelist_view
+    self.list_max_show_all, self.list_editable, self,
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/contrib/admin/views/main.py", line 79, in __init__
+    self.get_results(request)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/contrib/admin/views/main.py", line 177, in get_results
+    result_count = paginator.count
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/utils/functional.py", line 35, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/core/paginator.py", line 79, in count
+    return self.object_list.count()
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/db/models/query.py", line 364, in count
+    return self.query.get_count(using=self.db)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/db/models/sql/query.py", line 499, in get_count
+    number = obj.get_aggregation(using, ['__count'])['__count']
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/db/models/sql/query.py", line 480, in get_aggregation
+    result = compiler.execute_sql(SINGLE)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/db/models/sql/compiler.py", line 886, in execute_sql
+    raise original_exception
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/db/models/sql/compiler.py", line 876, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/db/backends/utils.py", line 80, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/db/backends/utils.py", line 65, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/db/utils.py", line 94, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/utils/six.py", line 685, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/db/backends/utils.py", line 65, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/django/db/backends/mysql/base.py", line 101, in execute
+    return self.cursor.execute(query, args)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/pymysql/cursors.py", line 166, in execute
+    result = self._query(query)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/pymysql/connections.py", line 856, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/pymysql/connections.py", line 1057, in _read_query_result
+    result.read()
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/pymysql/connections.py", line 1340, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/pymysql/connections.py", line 1014, in _read_packet
+    packet.check_error()
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/pymysql/connections.py", line 393, in check_error
+    err.raise_mysql_exception(self._data)
+  File "/Users/michael/Documents/python/learnDjango/blog/.env/lib/python3.5/site-packages/pymysql/err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+django.db.utils.ProgrammingError: (1146, "Table 'django_blog_db.blog_app_category' doesn't exist")

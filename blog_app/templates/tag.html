@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+<div id="article-banner">
+        <h2>Tags</h2>
+        <p class="post-date">标签检索</p>
+    </div>
+    <main class="app-body">
+        <div id="tag-cloud">
+            {% for tag in tag_list %}
+                <a class="tag" data-name="tag-{{ tag.id }}">{{ tag.name }}</a>
+            {% endfor %}
+
+{#            <a class="tag2" data-name="tag-1">Flask</a>#}
+{#            <a class="tag3" data-name="tag-2">MySQL</a>#}
+{#            <a class="tag2" data-name="tag-3">git</a>#}
+{#            <a class="tag0" data-name="tag-4">Nginx</a>#}
+{#            <a class="tag3" data-name="tag-5">HTTPS</a>#}
+{#            <a class="tag2" data-name="tag-6">RESTful</a>#}
+{#            <a class="tag2" data-name="tag-7">Linux</a>#}
+{#            <a class="tag2" data-name="tag-8">Mac</a>#}
+{#            <a class="tag3" data-name="tag-9">Redis</a>#}
+{#            <a class="tag2" data-name="tag-10">项目展示</a>#}
+{#            <a class="tag2" data-name="tag-11">爬虫</a>#}
+        </div>
+            {% for tag in tag_list %}
+                <div class="tag-list">
+                    <h3 class="tag-name" id="tag-{{ tag.id }}">{{ tag.name }}</h3>
+                    {% for article in tag.article_set.all %}
+                        <ul class="tag-preview">
+                            <li>
+                                <a href="{% url 'article' %}?id={{ article.id }}">{{ article.title }}</a>
+                            </li>
+                        </ul>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+    </main>
+{% endblock %}
+
+{% block script %}
+<script>
+    (function() {
+        var url = '{% url 'index' %}'+Math.random();
+        $('#article-banner').geopattern(url);
+        $('.header').removeClass('fixed-header')
+    })();
+    </script>
+    <div class="scroll-top">
+        <span class="arrow-icon"></span>
+    </div>
+    <script>
+    function async(u, c) {
+        var d = document,
+            t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function(e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
+    </script>
+    <script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function() {
+        FastClick.attach(document.body);
+    })
+    </script>
+    <script>
+    var hasLine = 'true';
+    async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function() {
+        $('figure pre').each(function(i, block) {
+            var figure = $(this).parents('figure');
+            if (hasLine == 'false') {
+                figure.find('.gutter').hide();
+            }
+            var lang = figure.attr('class').split(' ')[1] || 'code';
+            var codeHtml = $(this).html();
+            var codeTag = document.createElement('code');
+            codeTag.className = lang;
+            codeTag.innerHTML = codeHtml;
+            $(this).attr('class', '').empty().html(codeTag);
+            figure.attr('data-lang', lang.toUpperCase());
+            hljs.highlightBlock(block);
+        });
+    })
+    </script>
+    <!-- Baidu Tongji -->
+    <script src="{% static 'js/script.js' %}"></script>
+{% endblock %}
